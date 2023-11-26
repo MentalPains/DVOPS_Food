@@ -1,1 +1,9 @@
-[{"name":"Test","location":"Temasek","description":"Testing purpose","owner":"john@gmail.com","id":"1701020073612613"},{"name":"Testing123","location":"Temasek Poly","description":"Testing","owner":"chew@test.com","id":"1701020810203299"}]
+[
+    {
+        "name": "Samsung 50-inch TV",
+        "location": "Blk 3 Lvl 5 Rm 1",
+        "description": "Purchased for XYZ Exhibition",
+        "owner": "john@gmail.com",
+        "id": "1696158023514709"
+    }
+]
