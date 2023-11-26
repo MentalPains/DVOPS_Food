@@ -9,9 +9,13 @@ app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 app.use(express.static("./public"));
 
-const { editReviews, deleteReviews } =
-require('./utils/ReviewUtil')
 
+const { register, login } = require('./utils/UserUtil')
+app.post('/register', register);
+app.post('/login', login);
+
+const { viewReviews, editReviews, deleteReviews } = require('./utils/ReviewUtil')
+app.get('/view-reviews', viewReviews);
 app.put('/edit-review/:id', editReviews);
 app.delete('/delete-review/:id', deleteReviews);
 

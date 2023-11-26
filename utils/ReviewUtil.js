@@ -1,5 +1,12 @@
-const fs = require('fs').promises;
+const { readJSON, writeJSON } = require('./UserUtil')
+const { Review } = require('../models/review');
+ const fs = require('fs').promises;
+async function viewReviews(req, res) {
+    try {
+        const allReviews = await readJSON('utils/reviews.json');
+        return res.status(201).json(allReviews);
 
+ 
 async function editReviews(req, res) {
     try {
         const id = req.params.id;
@@ -28,6 +35,7 @@ async function editReviews(req, res) {
     }
 }
 
+
 async function deleteReviews(req, res) {
     try {
         const id = req.params.id;
@@ -50,4 +58,8 @@ async function deleteReviews(req, res) {
     }
 }
 
-module.exports = { editReviews, deleteReviews };
+
+
+module.exports = { viewReviews, editReviews, deleteReviews };
+
+
