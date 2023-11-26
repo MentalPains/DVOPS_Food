@@ -11,3 +11,4 @@ async function viewReviews(req, res) {
 module.exports = {
     viewReviews
 };
+
