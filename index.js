@@ -14,9 +14,10 @@ const { register, login } = require('./utils/UserUtil')
 app.post('/register', register);
 app.post('/login', login);
 
-const { viewReviews, editReviews } = require('./utils/ReviewUtil')
+const { viewReviews, editReviews, deleteReviews } = require('./utils/ReviewUtil')
 app.get('/view-reviews', viewReviews);
 app.put('/edit-review/:id', editReviews);
+app.delete('/delete-review/:id', deleteReviews);
 
 
 app.get('/', (req, res) => {
