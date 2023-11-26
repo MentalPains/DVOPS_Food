@@ -20,6 +20,11 @@ function viewReviews() {
                 response[i].id + ')"> Delete</button>' +
                 '</td>' +
                 '</tr>'
+        }
+        document.getElementById('tableContent').innerHTML = html;
+    };
+    request.send();
+}
 
 function addReview() {
     var response = "";
