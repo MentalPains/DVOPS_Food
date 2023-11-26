@@ -9,12 +9,15 @@ app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 app.use(express.static("./public"));
 
+
 const { register, login } = require('./utils/UserUtil')
 app.post('/register', register);
 app.post('/login', login);
 
-const { viewReviews } = require('./utils/ReviewUtil')
+const { viewReviews, editReviews } = require('./utils/ReviewUtil')
 app.get('/view-reviews', viewReviews);
+app.put('/edit-review/:id', editReviews);
+
 
 app.get('/', (req, res) => {
     res.sendFile(__dirname + "/public/" + startPage);
@@ -22,3 +25,4 @@ app.get('/', (req, res) => {
 app.listen(PORT, function () {
     console.log(`Demo project at: ${PORT}!`);
 });
+
