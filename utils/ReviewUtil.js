@@ -28,4 +28,26 @@ async function editReviews(req, res) {
     }
 }
 
-module.exports = { editReviews };
+async function deleteReviews(req, res) {
+    try {
+        const id = req.params.id;
+        const allReviews = await readJSON('utils/reviews.json');
+        var index = -1;
+        for (var i = 0; i < allReviews.length; i++) {
+            var curcurrReview = allReviews[i];
+            if (curcurrReview.id == id)
+                index = i;
+        }
+        if (index != -1) {
+            allReviews.splice(index, 1);
+            await fs.writeFile('utils/reviews.json', JSON.stringify(allReviews), 'utf8');
+            return res.status(201).json({ message: 'Review deleted successfully!' });
+        } else {
+            return res.status(500).json({ message: 'Error occurred, unable to delete!' });
+        }
+    } catch (error) {
+        return res.status(500).json({ message: error.message });
+    }
+}
+
+module.exports = { editReviews, deleteReviews };

@@ -9,10 +9,11 @@ app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 app.use(express.static("./public"));
 
-const { editReviews } =
+const { editReviews, deleteReviews } =
 require('./utils/ReviewUtil')
 
 app.put('/edit-review/:id', editReviews);
+app.delete('/delete-review/:id', deleteReviews);
 
 
 app.get('/', (req, res) => {
