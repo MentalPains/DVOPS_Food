@@ -4,6 +4,7 @@ class Review {
         this.location = location;
         this.description = description;
         this.owner = owner;
+
         
         const timestamp = new Date().getTime();
         const random = Math.floor(Math.random() * 1000);
@@ -14,3 +15,4 @@ class Review {
 }
 
 module.exports = { Review };
+
