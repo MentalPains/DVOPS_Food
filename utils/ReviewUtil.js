@@ -19,7 +19,7 @@ async function editReviews(req, res) {
         const name = req.body.name;
         const location = req.body.location;
         const description = req.body.description;
-        const allReviews = await readJSON('utils/review.json');
+        const allReviews = await readJSON('utils/reviews.json');
         var modified = false;
         for (var i = 0; i < allReviews.length; i++) {
             var curcurrReview = allReviews[i];
@@ -31,7 +31,7 @@ async function editReviews(req, res) {
             }
         }
         if (modified) {
-            await fs.writeFile('utils/review.json', JSON.stringify(allReviews), 'utf8');
+            await fs.writeFile('utils/reviews.json', JSON.stringify(allReviews), 'utf8');
             return res.status(201).json({ message: 'Review modified successfully!' });
         } else {
             return res.status(500).json({ message: 'Error occurred, unable to modify!' });
