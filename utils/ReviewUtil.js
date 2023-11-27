@@ -1,6 +1,7 @@
 const { readJSON, writeJSON } = require('./UserUtil')
 const { Review } = require('../models/review');
 const fs = require('fs').promises;
+
 async function viewReviews(req, res) {
     try {
         const allReviews = await readJSON('utils/reviews.json');
