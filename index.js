@@ -16,7 +16,7 @@ app.post('/login', login);
 
 const { addReviews, viewReviews, editReviews, deleteReviews } = require('./utils/ReviewUtil');
 
-app.post('/add-reviews', addReviews);
+app.post('/add-review', addReviews);
 app.get('/view-reviews', viewReviews);
 app.put('/edit-review/:id', editReviews);
 app.delete('/delete-review/:id', deleteReviews);

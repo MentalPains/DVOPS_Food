@@ -26,7 +26,7 @@ function viewReviews() {
     request.send();
 }
 
-function addReview() {
+function addReviews() {
     var response = "";
     var jsonData = new Object();
     jsonData.name = document.getElementById("name").value;
