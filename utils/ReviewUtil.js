@@ -2,6 +2,20 @@ const { readJSON, writeJSON } = require('./UserUtil')
 const { Review } = require('../models/review');
 const fs = require('fs').promises;
 
+async function addReviews(req, res) {
+    try {
+        const name = req.body.name;
+        const location = req.body.location;
+        const description = req.body.description;
+        const owner = req.body.owner;
+        const newReview = new Review(name, location, description, owner);
+        const updatedReviews = await writeJSON(newReview, 'utils/reviews.json');
+        return res.status(201).json(updatedReviews);
+    } catch (error) {
+        return res.status(500).json({ message: error.message });
+    }
+}
+
 async function viewReviews(req, res) {
     try {
         const allReviews = await readJSON('utils/reviews.json');
@@ -10,9 +24,6 @@ async function viewReviews(req, res) {
         return res.status(500).json({ message: error.message });
     }
 }
-module.exports = {
-    viewReviews
-};
 
 async function editReviews(req, res) {
     try {
@@ -42,7 +53,6 @@ async function editReviews(req, res) {
     }
 }
 
-
 async function deleteReviews(req, res) {
     try {
         const id = req.params.id;
@@ -66,5 +76,4 @@ async function deleteReviews(req, res) {
 }
 
 
-
-module.exports = { viewReviews, editReviews, deleteReviews };
+module.exports = { addReviews, viewReviews, editReviews, deleteReviews };
