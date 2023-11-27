@@ -1,20 +1,61 @@
 const { describe, it } = require('mocha');
 const { expect } = require('chai');
-
 const fs = require('fs').promises;
-const { editReviews, deleteReviews} = require('../utils/ReviewUtil')
+const { addReviews, viewReviews, editReviews, deleteReviews } = require('../utils/ReviewUtil')
 
-describe('Testing Review related features', () => {
-    const reviewFilePath = 'utils/reviews.json';
+describe('Testing review related features', () => {
+    const reviewsFilePath = 'utils/reviews.json';
     var orgContent = "";
 
     beforeEach(async () => {
-        orgContent = await fs.readFile(reviewFilePath, 'utf8');
+        orgContent = await fs.readFile(reviewsFilePath, 'utf8');
         orgContent = JSON.parse(orgContent);
     });
 
     afterEach(async () => {
-        await fs.writeFile(reviewFilePath, JSON.stringify(orgContent), 'utf8');
+        await fs.writeFile(reviewsFilePath, JSON.stringify(orgContent), 'utf8');
+    });
+
+    it('Should add a new review successfully', async () => {
+        const req = {
+            body: {
+                name: "iPad Mini",
+                location: "Blk 4 Lvl 5 Rm 2",
+                description: "For project showcase",
+                owner: "john@gmail.com"
+            },
+        };
+        const res = {
+            status: function (code) {
+                expect(code).to.equal(201);
+                return this;
+            },
+            json: function (data) {
+                expect(data).to.have.lengthOf(orgContent.length + 1);
+                expect(data[orgContent.length].name).to.equal(req.body.name);
+            },
+        };
+        await addReviews(req, res);
+    });
+
+    it('Should not be able to add review due to incomplete input', async () => {
+        const req = {
+            body: {
+                name: "iPad Mini",
+                location: "Blk 4 Lvl 5 Rm 2",
+                description: "For project showcase"
+            },
+        };
+        const res = {
+            status: function (code) {
+                expect(code).to.equal(500);
+                return this;
+            },
+            json: function (data) {
+                expect(data.message).to.not.equal(undefined);
+            },
+        };
+        await addReviews(req, res);
     });
 
     it('Should edit a review successfully', async () => {
@@ -28,7 +69,6 @@ describe('Testing Review related features', () => {
                 id: orgContent[0].id
             }
         };
-
         const res = {
             status: function (code) {
                 expect(code).to.equal(201);
@@ -40,6 +80,7 @@ describe('Testing Review related features', () => {
         };
         await editReviews(req, res);
     });
+
     it('Should not be able to edit review due to invalid id', async () => {
         const req = {
             body: {
@@ -51,7 +92,6 @@ describe('Testing Review related features', () => {
                 id: "ABCDEFG"
             }
         };
-
         const res = {
             status: function (code) {
                 expect(code).to.equal(500);
@@ -61,7 +101,6 @@ describe('Testing Review related features', () => {
                 expect(data.message).to.equal('Error occurred, unable to modify!');
             },
         };
-
         await editReviews(req, res);
     });
 

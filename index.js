@@ -14,11 +14,12 @@ const { register, login } = require('./utils/UserUtil')
 app.post('/register', register);
 app.post('/login', login);
 
-const { viewReviews, editReviews, deleteReviews } = require('./utils/ReviewUtil')
+const { addReviews, viewReviews, editReviews, deleteReviews } = require('./utils/ReviewUtil');
+
+app.post('/add-reviews', addReviews);
 app.get('/view-reviews', viewReviews);
 app.put('/edit-review/:id', editReviews);
 app.delete('/delete-review/:id', deleteReviews);
-
 
 app.get('/', (req, res) => {
     res.sendFile(__dirname + "/public/" + startPage);
