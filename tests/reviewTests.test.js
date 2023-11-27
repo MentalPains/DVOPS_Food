@@ -1,17 +1,21 @@
 const { describe, it } = require('mocha');
 const { expect } = require('chai');
 const fs = require('fs').promises;
-const { addReviews, viewReviews } = require('../utils/ReviewUtil')
+const { addReviews, viewReviews, editReviews, deleteReviews } = require('../utils/ReviewUtil')
+
 describe('Testing review related features', () => {
     const reviewsFilePath = 'utils/reviews.json';
     var orgContent = "";
+
     beforeEach(async () => {
         orgContent = await fs.readFile(reviewsFilePath, 'utf8');
         orgContent = JSON.parse(orgContent);
     });
+
     afterEach(async () => {
         await fs.writeFile(reviewsFilePath, JSON.stringify(orgContent), 'utf8');
     });
+
     it('Should add a new review successfully', async () => {
         const req = {
             body: {
@@ -33,6 +37,7 @@ describe('Testing review related features', () => {
         };
         await addReviews(req, res);
     });
+
     it('Should not be able to add review due to incomplete input', async () => {
         const req = {
             body: {
@@ -52,17 +57,86 @@ describe('Testing review related features', () => {
         };
         await addReviews(req, res);
     });
-    it('Should return an array when viewing reviews', async () => {
-        const req = {};
+
+    it('Should edit a review successfully', async () => {
+        const req = {
+            body: {
+                name: "Test",
+                location: "Temasek",
+                description: "Testing purpose",
+            },
+            params: {
+                id: orgContent[0].id
+            }
+        };
         const res = {
             status: function (code) {
                 expect(code).to.equal(201);
                 return this;
             },
             json: function (data) {
-                expect(Array.isArray(data)).to.be.true;
+                expect(data.message).to.equal('Review modified successfully!');
             },
         };
-        await viewReviews(req, res);
+        await editReviews(req, res);
+    });
+
+    it('Should not be able to edit review due to invalid id', async () => {
+        const req = {
+            body: {
+                name: "Test",
+                location: "Temasek",
+                description: "Testing purpose",
+            },
+            params: {
+                id: "ABCDEFG"
+            }
+        };
+        const res = {
+            status: function (code) {
+                expect(code).to.equal(500);
+                return this;
+            },
+            json: function (data) {
+                expect(data.message).to.equal('Error occurred, unable to modify!');
+            },
+        };
+        await editReviews(req, res);
+    });
+
+    it('Should delete a review successfully', async () => {
+        const req = {
+            params: {
+                id: orgContent[0].id
+            }
+        };
+        const res = {
+            status: function (code) {
+                expect(code).to.equal(201);
+                return this;
+            },
+            json: function (data) {
+                expect(data.message).to.equal('Review deleted successfully!');
+            },
+        };
+        await deleteReviews(req, res);
+    });
+
+    it('Should not be able to delete review due to invalid id', async () => {
+        const req = {
+            params: {
+                id: "ABCDEFG"
+            }
+        };
+        const res = {
+            status: function (code) {
+                expect(code).to.equal(500);
+                return this;
+            },
+            json: function (data) {
+                expect(data.message).to.equal('Error occurred, unable to delete!');
+            },
+        };
+        await deleteReviews(req, res);
     });
 });
