@@ -13,8 +13,8 @@ const { register, login } = require('./utils/UserUtil')
 app.post('/register', register);
 app.post('/login', login);
 
-const { addReview } = require('./utils/ReviewUtil')
-app.post('/add-review', addReview)
+const { addReviews } = require('./utils/ReviewUtil')
+app.post('/add-reviews', addReviews)
 
 app.get('/', (req, res) => {
     res.sendFile(__dirname + "/public/" + startPage);

@@ -1,4 +1,4 @@
-function addReview() {
+function addReviews() {
     var response = "";
     var jsonData = new Object();
     jsonData.name = document.getElementById("name").value;
@@ -11,7 +11,7 @@ function addReview() {
         return;
     }
     var request = new XMLHttpRequest();
-    request.open("POST", "/add-review", true);
+    request.open("POST", "/add-reviews", true);
     request.setRequestHeader('Content-Type', 'application/json');
     request.onload = function () {
         response = JSON.parse(request.responseText);

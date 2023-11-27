@@ -1,6 +1,6 @@
 const { readJSON, writeJSON } = require('./UserUtil')
 const { Review } = require('../models/review');
-async function addReview(req, res) {
+async function addReviews(req, res) {
     try {
         const name = req.body.name;
         const location = req.body.location;
@@ -14,5 +14,5 @@ async function addReview(req, res) {
     }
 }
 module.exports = {
-    addReview
+    addReviews
 };
