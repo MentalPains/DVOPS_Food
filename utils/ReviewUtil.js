@@ -1,5 +1,6 @@
 const { readJSON, writeJSON } = require('./UserUtil')
 const { Review } = require('../models/review');
+const fs = require('fs').promises;
 
 async function addReviews(req, res) {
     try {
@@ -14,11 +15,6 @@ async function addReviews(req, res) {
         return res.status(500).json({ message: error.message });
     }
 }
-module.exports = {
-    addReviews
-};
-
-const fs = require('fs').promises;
 
 async function viewReviews(req, res) {
     try {
@@ -28,9 +24,6 @@ async function viewReviews(req, res) {
         return res.status(500).json({ message: error.message });
     }
 }
-module.exports = {
-    viewReviews
-};
 
 async function editReviews(req, res) {
     try {
@@ -81,7 +74,6 @@ async function deleteReviews(req, res) {
         return res.status(500).json({ message: error.message });
     }
 }
-
 
 
 module.exports = { addReviews, viewReviews, editReviews, deleteReviews };
