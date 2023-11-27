@@ -1,7 +1,7 @@
 {
   "name": "dvops_food",
   "version": "1.0.0",
-  "description": "",
+  "description": "Description of your project",
   "main": "index.js",
   "nyc": {
     "include": [
@@ -21,12 +21,12 @@
   "scripts": {
     "test": "nyc mocha tests/*.test.js"
   },
-  "author": "",
+  "author": "Your Name",
   "license": "ISC",
   "dependencies": {
     "body-parser": "^1.20.2",
-    "chai": "^4.3.10",
     "chai-http": "^4.4.0",
+    "chai": "^4.3.10",
     "express": "^4.18.2",
     "fs": "^0.0.1-security",
     "mocha": "^10.2.0",
