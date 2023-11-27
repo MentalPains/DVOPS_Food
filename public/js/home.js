@@ -26,12 +26,11 @@ function addReviews() {
             window.location.href = 'home.html';
         }
         else {
-            document.getElementById("message").innerHTML = 'Unable to add review!';
+            document.getElementById("message").innerHTML = 'Unable to add review!'; document.getElementById("message").setAttribute("class", "text-danger");
             document.getElementById("message").setAttribute("class", "text-danger");
         }
-        document.getElementById('tableContent').innerHTML = html;
     };
-    request.send();
+    request.send(JSON.stringify(jsonData));
 }
 
 function viewReviews() {
