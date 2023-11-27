@@ -1,7 +1,7 @@
 function viewReviews() {
     var response = '';
     var request = new XMLHttpRequest();
-    request.open('GET', '/view-reviews', true);
+    request.open('GET', '/view-review', true);
     request.setRequestHeader('Content-Type', 'application/json');
     request.onload = function () {
         response = JSON.parse(request.responseText);
