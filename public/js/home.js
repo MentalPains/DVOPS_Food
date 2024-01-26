@@ -31,6 +31,8 @@ function addReviews() {
     jsonData.name = document.getElementById("name").value;
     jsonData.description = document.getElementById("description").value;
     jsonData.owner = sessionStorage.getItem("email");
+    console.log("Name:", jsonData.name);
+    console.log("Description:", jsonData.description);
     if (jsonData.name == "" || jsonData.description == "") {
         document.getElementById("message").innerHTML = 'All fields are required!';
         document.getElementById("message").setAttribute("class", "text-danger");
@@ -56,5 +58,6 @@ function addReviews() {
         }
         document.getElementById('tableContent').innerHTML = html;
     };
-    request.send();
+    request.send(JSON.stringify(jsonData));
+    console.log(jsonData);
 }
