@@ -10,7 +10,6 @@ function viewReviews() {
             html += '<tr>' +
                 '<td>' + (i + 1) + '</td>' +
                 '<td>' + response[i].name + '</td>' +
-                '<td>' + response[i].location + '</td>' +
                 '<td>' + response[i].description + '</td>' +
                 '<td>' + response[i].owner + '</td>' +
                 '<td>' +
@@ -30,10 +29,9 @@ function addReviews() {
     var response = "";
     var jsonData = new Object();
     jsonData.name = document.getElementById("name").value;
-    jsonData.location = document.getElementById("location").value;
     jsonData.description = document.getElementById("description").value;
     jsonData.owner = sessionStorage.getItem("email");
-    if (jsonData.name == "" || jsonData.location == "" || jsonData.description == "") {
+    if (jsonData.name == "" || jsonData.description == "") {
         document.getElementById("message").innerHTML = 'All fields are required!';
         document.getElementById("message").setAttribute("class", "text-danger");
         return;
@@ -49,12 +47,11 @@ function addReviews() {
                 jsonData.name + '!';
             document.getElementById("message").setAttribute("class", "text-success");
             document.getElementById("name").value = "";
-            document.getElementById("location").value = "";
             document.getElementById("description").value = "";
             window.location.href = 'home.html';
         }
         else {
-            document.getElementById("message").innerHTML = 'Unable to add review!'; document.getElementById("message").setAttribute("class", "text-danger");
+            document.getElementById("message").innerHTML = 'Unable to add review!';
             document.getElementById("message").setAttribute("class", "text-danger");
         }
         document.getElementById('tableContent').innerHTML = html;
