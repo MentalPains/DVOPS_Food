@@ -1,6 +1,7 @@
 class Review {
     constructor(name, description, owner) {
         this.name = name;
+        this.description = description;
         this.owner = owner;
 
         
