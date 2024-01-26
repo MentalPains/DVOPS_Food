@@ -20,7 +20,6 @@ describe('Testing review related features', () => {
         const req = {
             body: {
                 name: "iPad Mini",
-                location: "Blk 4 Lvl 5 Rm 2",
                 description: "For project showcase",
                 owner: "john@gmail.com"
             },
@@ -42,7 +41,6 @@ describe('Testing review related features', () => {
         const req = {
             body: {
                 name: "iPad Mini",
-                location: "Blk 4 Lvl 5 Rm 2",
                 description: "For project showcase"
             },
         };
@@ -62,7 +60,6 @@ describe('Testing review related features', () => {
         const req = {
             body: {
                 name: "Test",
-                location: "Temasek",
                 description: "Testing purpose",
             },
             params: {
@@ -85,7 +82,6 @@ describe('Testing review related features', () => {
         const req = {
             body: {
                 name: "Test",
-                location: "Temasek",
                 description: "Testing purpose",
             },
             params: {
@@ -140,4 +136,3 @@ describe('Testing review related features', () => {
         await deleteReviews(req, res);
     });
 });
-

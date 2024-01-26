@@ -24,7 +24,6 @@
                         <tr>
                             <th>ID</th>
                             <th>Name</th>
-                            <th>Location</th>
                             <th>Description</th>
                             <th>Owner</th>
                             <th></th>
@@ -60,24 +59,26 @@
                     <form>
                         <div class="form-group">
                             <label for="name">Review Name</label>
-                            <input type="text" class="form-control" id="name" placeholder="Enter review name">
+                            <select class="form-control" id="name">
+                                <option value="">Select a name</option>
+                                <option value="Macs">Macs</option>
+                                <option value="PepperLunch">Pepper Lunch</option>
+                                <option value="Yeetus">Yeetus</option>
+                                <option value="Deletus">Deletus</option>
+                            </select>
                         </div>
-                        <div class="form-group">
-                            <label for="location">Location</label>
-                            <input type="text" class="form-control" id="location" placeholder="Enter review location">
-                        </div>
+                        
                         <div class="form-group">
                             <label for="description">Description</label>
                             <input type="text" class="form-control" id="description"
-                                placeholder="Enter short description">
+                                placeholder="Enter description">
                         </div>
                         <p align="right" id="message" class=""></p>
                     </form>
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data- dismiss="modal">Close</button>
-                    <button type="button" class="btn btn-primary" onclick="addReviews()">Add
-                        Review</button>
+                    <button type="button" class="btn btn-primary" onclick="addReviews()">Add Review</button>
                 </div>
             </div>
         </div>

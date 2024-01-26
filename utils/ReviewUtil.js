@@ -5,10 +5,9 @@ const fs = require('fs').promises;
 async function addReviews(req, res) {
     try {
         const name = req.body.name;
-        const location = req.body.location;
         const description = req.body.description;
         const owner = req.body.owner;
-        const newReview = new Review(name, location, description, owner);
+        const newReview = new Review(name, description, owner);
         const updatedReviews = await writeJSON(newReview, 'utils/reviews.json');
         return res.status(201).json(updatedReviews);
     } catch (error) {
@@ -29,7 +28,6 @@ async function editReviews(req, res) {
     try {
         const id = req.params.id;
         const name = req.body.name;
-        const location = req.body.location;
         const description = req.body.description;
         const allReviews = await readJSON('utils/reviews.json');
         var modified = false;
@@ -37,7 +35,6 @@ async function editReviews(req, res) {
             var curcurrReview = allReviews[i];
             if (curcurrReview.id == id) {
                 allReviews[i].name = name;
-                allReviews[i].location = location;
                 allReviews[i].description = description;
                 modified = true;
             }
