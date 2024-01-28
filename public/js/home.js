@@ -61,3 +61,58 @@ function addReviews() {
     request.send(JSON.stringify(jsonData));
     console.log(jsonData);
 }
+
+function editReview(data) {
+    var selectedReview = JSON.parse(data);
+    document.getElementById("editName").value = selectedReview.name;
+    document.getElementById("editDescription").value = selectedReview.description;
+    document.getElementById("updateButton").setAttribute("onclick", 'updateReview("' +
+        selectedReview.id + '")');
+    $('#editReviewModal').modal('show');
+}
+function updateReview(id) {
+    console.log(id)
+    var response = "";
+    var jsonData = new Object();
+    jsonData.name = document.getElementById("editName").value;
+    jsonData.description = document.getElementById("editDescription").value;
+    if (jsonData.name == ""  || jsonData.description == "") {
+        document.getElementById("editMessage").innerHTML = 'All fields are required!';
+        document.getElementById("editMessage").setAttribute("class", "text-danger");
+        return;
+    }
+    var request = new XMLHttpRequest();
+    request.open("PUT", "/edit-review/" + id, true);
+    request.setRequestHeader('Content-Type', 'application/json');
+    request.onload = function () {
+        response = JSON.parse(request.responseText);
+        if (response.message == "Review modified successfully!") {
+            document.getElementById("editMessage").innerHTML = 'Edited Review: ' +
+                jsonData.name + '!';
+            document.getElementById("editMessage").setAttribute("class",
+                "text-success");
+            window.location.href = 'home.html';
+        }
+        else {
+            document.getElementById("editMessage").innerHTML = 'Unable to edit review!';
+            document.getElementById("editMessage").setAttribute("class", "text-danger");
+        }
+    };
+    request.send(JSON.stringify(jsonData));
+}
+function deleteReview(selectedId) {
+    var response = "";
+    var request = new XMLHttpRequest();
+    request.open("DELETE", "/delete-review/" + selectedId, true);
+    request.setRequestHeader('Content-Type', 'application/json');
+    request.onload = function () {
+        response = JSON.parse(request.responseText);
+        if (response.message == "Review deleted successfully!") {
+            window.location.href = 'home.html';
+        }
+        else {
+            alert('Unable to delete review!');
+        }
+    };
+    request.send();
+}
