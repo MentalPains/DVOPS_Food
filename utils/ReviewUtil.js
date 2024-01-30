@@ -8,11 +8,6 @@ async function addReviews(req, res) {
         const description = req.body.description;
         const owner = req.body.owner;
         const newReview = new Review(name, description, owner);
-        const validNames = ['PepperLunch', 'Macs', 'Yeetus', 'Deletus'];
-        
-        if (!validNames.includes(name)) {
-            return res.status(400).json({ message: 'Invalid name value' });
-        }
         const updatedReviews = await writeJSON(newReview, 'utils/reviews.json');
         return res.status(201).json(updatedReviews);
     } catch (error) {
