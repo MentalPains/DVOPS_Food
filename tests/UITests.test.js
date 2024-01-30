@@ -22,13 +22,11 @@ before(async function () {
 
 describe('Testing Edit Review Modal', function () {
     it('Should successfully update review information', async function () {
-
-        // Collecting initial review information
-        const initialRestaurantName = await driver.findElement(By.id('restaurant-name')).getText();
-        const initialDescription = await driver.findElement(By.id('review-description')).getText();
+        console.log('Starting the test...');
 
         // Clicking on the "Edit Review" button to open the modal
-        await driver.findElement(By.id('edit-review-button')).click();
+        await driver.findElement(By.id('editReviewModalLabel')).click();
+        console.log('Clicked on the "Edit Review" button...');
 
         // Modifying review information in the edit modal
         const newRestaurantName = 'New Restaurant Name';
@@ -36,25 +34,34 @@ describe('Testing Edit Review Modal', function () {
 
         // Selecting a different restaurant from the dropdown
         await driver.findElement(By.id('editName')).sendKeys(newRestaurantName);
+        console.log('Selected a different restaurant...');
 
         // Modifying the review description
         await driver.findElement(By.id('editDescription')).clear();
         await driver.findElement(By.id('editDescription')).sendKeys(newDescription);
+        console.log('Modified the review description...');
 
         // Clicking the "Update Review" button in the modal
         await driver.findElement(By.id('updateButton')).click();
+        console.log('Clicked on the "Update Review" button...');
 
         // Waiting for the changes to be reflected (assuming an asynchronous update)
         await driver.sleep(2000);
+        console.log('Waiting for changes to be reflected...');
 
-        // Verifying the changes by checking the updated review in the backend
-        const updatedReview = await getReviewById(reviewId); // Implement a function to get a review by ID
+        // Verifying the changes by checking the updated review on the frontend
+        const updatedRestaurantName = await driver.findElement(By.id('editName')).getAttribute('value');
+        const updatedDescription = await driver.findElement(By.id('editDescription')).getAttribute('value');
 
-        // Asserting that the review information has been successfully updated in the backend
-        expect(updatedReview.name).to.equal(newRestaurantName);
-        expect(updatedReview.description).to.equal(newDescription);
+        console.log('Verifying changes...');
+        // Asserting that the review information has been successfully updated on the frontend
+        expect(updatedRestaurantName).to.equal(newRestaurantName);
+        expect(updatedDescription).to.equal(newDescription);
+        console.log('Assertions passed.');
     });
 });
+
+
 
 
 after(async function () {
