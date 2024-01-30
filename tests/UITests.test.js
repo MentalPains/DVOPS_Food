@@ -1,3 +1,25 @@
+const { app } = require('../index');
+const { Builder, By, Key, until } = require('selenium-webdriver');
+const { describe, it } = require('mocha');
+const { expect } = require('chai');
+const fs = require('fs').promises;
+
+const chrome = require('selenium-webdriver/chrome');
+const chromeOptions = new chrome.Options();
+chromeOptions.addArguments('--headless');
+
+const driver = new Builder().forBrowser('chrome').setChromeOptions(chromeOptions).build();
+var server;
+var counter = 0;
+
+before(async function () {
+    server = await new Promise((resolve) => {
+        server = app.listen(0, 'localhost', () => {
+            resolve(server);
+        });
+    })
+});
+
 describe('Testing Edit Resource UI', function () {
     it('Should be able to edit and display updated resource', async function () {
         this.timeout(100000);
