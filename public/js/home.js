@@ -62,6 +62,7 @@ function addReviews() {
     console.log(jsonData);
 }
 
+
 function editReview(data) {
     var selectedReview = JSON.parse(data);
     document.getElementById("editName").value = selectedReview.name;
