@@ -37,6 +37,26 @@ describe('Testing review related features', () => {
         await addReviews(req, res);
     });
 
+    it('Should handle invalid name value', async () => {
+        const req = {
+            body: {
+                name: "InvalidName", // Assuming "InvalidName" is not a valid option
+                description: "For project showcase",
+                owner: "john@gmail.com"
+            },
+        };
+        const res = {
+            status: function (code) {
+                expect(code).to.equal(500); // or your expected failure code
+                return this;
+            },
+            json: function (data) {
+                expect(data.message).to.not.equal(undefined);
+            },
+        };
+        await addReviews(req, res);
+    });
+
     it('Should not be able to add review due to incomplete input', async () => {
         const req = {
             body: {
