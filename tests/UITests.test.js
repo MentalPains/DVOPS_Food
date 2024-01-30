@@ -22,16 +22,19 @@ before(async function () {
 describe('Testing Reviews UI', function () {
     it('Should be able to add and display new reviews', async function () {
         this.timeout(100000);
-        const baseUrl = 'http://localhost:' + server.address().port + '/instrumented';
+        const baseUrl = 'http://localhost:' + server.address().port;
         await driver.get(baseUrl);
+
         // Locate and interact with the email field
         const emailElement = await driver.findElement(By.id('email'));
         await emailElement.click(); // Click on the element
         await emailElement.sendKeys('john@gmail.com');
+
         // Locate and interact with the password field
         const passwordElement = await driver.findElement(By.id('password'));
         await passwordElement.click(); // Click on the element
         await passwordElement.sendKeys('123456');
+
         // Locate and interact with the Login button
         const loginButton = await driver.findElement(By.xpath('//button[text()="Login"]'));
         await loginButton.click();
@@ -39,14 +42,14 @@ describe('Testing Reviews UI', function () {
         await driver.wait(until.urlIs(baseUrl + '/home.html'), 10000);
         // Assert that the URL matches the expected URL
         const currentUrl = await driver.getCurrentUrl();
-        expect(currentUrl).to.equal('http://localhost:' + server.address().port + '/instrumented/home.html');
+        expect(currentUrl).to.equal('http://localhost:' + server.address().port + '/home.html');
         // Locate and interact with the Login button
         const addButton = await driver.findElement(By.xpath("//div[@class='col-md-2']//button[contains(text(), 'Add Review')]"));
         await addButton.click();
         // Wait for the modal to load
         const reviewModal = await driver.findElement(By.id('reviewModal'));
         await driver.wait(until.elementIsVisible(reviewModal), 5000);
-        const { Select } = require('selenium-webdriver/support/select');
+        const { Select } = require('selenium-webdriver/lib/select');
         const nameDropdownElement = await driver.findElement(By.id('name'));
         const nameSelect = new Select(nameDropdownElement);
         await nameSelect.selectByVisibleText('Macs'); // This will select the 'Macs' option
