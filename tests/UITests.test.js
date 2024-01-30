@@ -68,3 +68,9 @@ describe('Testing Edit Resource UI', function () {
         expect(updatedDescription).to.equal('Updated Description');
     });
 });
+
+after(async function () {
+    await driver.quit();
+    await server.close();
+    process.exit(0);
+});
