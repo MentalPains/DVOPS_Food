@@ -88,16 +88,65 @@ describe('Testing Edit Review UI', function () {
         // Wait for the changes to be reflected (assuming an asynchronous update)
         await driver.sleep(2000);
 
-        // Verify the changes by checking the updated review in the backend or UI
-        // You may need to navigate back to the main page and view the updated review
-
         // For now, let's just check if the modal is closed after clicking the update button
         const isModalClosed = await editReviewModal.isDisplayed().catch(() => false);
+        expect(isModalClosed).to.equal(false);
+    });
+    it('Should cancel the edit operation and close the modal on "Close" button click', async function () {
+        this.timeout(100000);
+        const baseUrl = 'http://localhost:' + server.address().port;
+        await driver.get(baseUrl);
+
+        // Locate and interact with the email field
+        const emailElement = await driver.findElement(By.id('email'));
+        await emailElement.click(); // Click on the element
+        await emailElement.sendKeys('john@gmail.com');
+
+        // Locate and interact with the password field
+        const passwordElement = await driver.findElement(By.id('password'));
+        await passwordElement.click(); // Click on the element
+        await passwordElement.sendKeys('123456');
+
+        // Locate and interact with the Login button
+        const loginButton = await driver.findElement(By.xpath('//button[text()="Login"]'));
+        await loginButton.click();
+        // Wait for the page to be redirected
+        await driver.wait(until.urlIs(baseUrl + '/home.html'), 10000);
+        // Assert that the URL matches the expected URL
+        const currentUrl = await driver.getCurrentUrl();
+        expect(currentUrl).to.equal('http://localhost:' + server.address().port + '/home.html');
+
+        // Navigate to the "EditModal" page
+        const editButton = await driver.findElement(By.xpath("//button[contains(text(), 'Edit')]"));
+        await editButton.click();
+
+        // Wait for the modal to load
+        const editReviewModal = await driver.findElement(By.id('editReviewModal'));
+        await driver.wait(until.elementIsVisible(editReviewModal), 5000);
+
+        const modalIsOpen = await driver.findElement(By.id('editReviewModal')).isDisplayed();
+        expect(modalIsOpen).to.equal(true);
+
+        // Check if the "Close" button is present
+        const closeButton = await driver.findElement(By.xpath("//button[text()='close']"));
+        console.log('Found the "Close" button.');
+        // Click the "Close" button
+        await closeButton.click();
+
+        // Wait for the modal to close
+        await driver.wait(async () => {
+            return !(await driver.findElement(By.id('editReviewModal')).isDisplayed().catch(() => false));
+        }, 5000, 'Timed out waiting for the modal to close');
+
+        // Verify that the modal is closed
+        const isModalClosed = await driver.findElement(By.id('editReviewModal')).isDisplayed().catch(() => false);
+        console.log('Is modal closed?', isModalClosed);
+
+        // Assert that the modal is closed
         expect(isModalClosed).to.equal(false);
 
     });
 });
-
 
 after(async function () {
     await driver.quit();
