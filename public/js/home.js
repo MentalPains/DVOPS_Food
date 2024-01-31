@@ -15,7 +15,7 @@ function viewReviews() {
                 '<td>' +
                 '<button type="button" class="btn btn-warning" onclick="editReview(\'' +
                 JSON.stringify(response[i]).replaceAll('\"', '&quot;') + '\')">Edit </button> ' +
-                '<button type="button" class="btn btn-danger" onclick="deleteReview(' +
+                '<button type="button" class="btn btn-danger" onclick="confirmDelete(' +
                 response[i].id + ')"> Delete</button>' +
                 '</td>' +
                 '</tr>'
@@ -115,4 +115,18 @@ function deleteReview(selectedId) {
         }
     };
     request.send();
+}
+
+async function confirmDelete(selectedId) {
+    // Display a confirmation dialog
+    const confirmed = confirm("Are you sure you want to delete this review?");
+
+    // Check if the user clicked OK
+    if (confirmed) {
+        // Call the deleteReviews function
+        deleteReview(selectedId);
+    } else {
+        // User clicked Cancel, do nothing or provide feedback
+        console.log("Delete operation canceled");
+    }
 }

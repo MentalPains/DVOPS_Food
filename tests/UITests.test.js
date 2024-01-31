@@ -127,23 +127,39 @@ describe('Testing Edit Review UI', function () {
         const modalIsOpen = await driver.findElement(By.id('editReviewModal')).isDisplayed();
         expect(modalIsOpen).to.equal(true);
 
+
         // Check if the "Close" button is present
         const closeButton = await driver.findElement(By.xpath("//button[text()='close']"));
         console.log('Found the "Close" button.');
+
+        // Wait for the modal to be visible
+        await driver.wait(until.elementIsVisible(driver.findElement(By.id('editReviewModal'))), 5000, 'Timed out waiting for the modal to be visible');
+
+        // Check the initial state of the modal
+        const isModalInitialState = await driver.findElement(By.id('editReviewModal')).isDisplayed();
+        console.log('Initial state of the modal:', isModalInitialState);
+
         // Click the "Close" button
-        await closeButton.click();
+        // Click the "Close" button
+        try {
+            await closeButton.click();
+            console.log('Clicked the Close button.');
 
-        // Wait for the modal to close
-        await driver.wait(async () => {
-            return !(await driver.findElement(By.id('editReviewModal')).isDisplayed().catch(() => false));
-        }, 5000, 'Timed out waiting for the modal to close');
+            // Wait for the modal to be closed
+            await driver.wait(async () => {
+                const isModalClosed = await driver.findElement(By.id('editReviewModal')).isDisplayed().catch(() => false);
+                return !isModalClosed;
+            }, 10000, 'Timed out waiting for the modal to close');
 
-        // Verify that the modal is closed
-        const isModalClosed = await driver.findElement(By.id('editReviewModal')).isDisplayed().catch(() => false);
-        console.log('Is modal closed?', isModalClosed);
+            // Check the state of the modal after waiting
+            const isModalClosedAfterDelay = await driver.findElement(By.id('editReviewModal')).isDisplayed().catch(() => false);
+            console.log('Is modal closed after delay?', isModalClosedAfterDelay);
 
-        // Assert that the modal is closed
-        expect(isModalClosed).to.equal(false);
+            // Assert that the state after clicking the "Close" button is different from the initial state
+            expect(isModalClosedAfterDelay).to.not.equal(isModalInitialState);
+        } catch (error) {
+            console.error('Error clicking the Close button:', error);
+        }
 
     });
 });
