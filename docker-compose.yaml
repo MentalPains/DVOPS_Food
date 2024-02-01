@@ -12,4 +12,11 @@ services:
       dockerfile: Dockerfile-Johnathon
     image: mentalpains/rms-docker-img:latest
     container_name: rms-docker-container
+  Hongshen:
+    build:
+      context: .
+      dockerfile: Dockerfile-Johnathon
+    image: hongbongy/rms-docker-img:latest
+    container_name: rms-docker-container
+  
     
