@@ -6,7 +6,9 @@
   "nyc": {
     "include": [
       "utils/UserUtil.js",
-      "utils/ReviewUtil.js"
+      "utils/ReviewUtil.js",
+      "index.js",
+      "public/**/*.js"
     ],
     "exclude": [],
     "reporter": [
@@ -24,6 +26,8 @@
     "start": "node index.js",
     "frontend-instrument": "nyc instrument .\\public\\js .\\public\\instrumented\\js && copy .\\public\\*.html .\\public\\instrumented\\ && copy .\\public\\images.\\public\\instrumented\\ && copy .\\public\\css .\\public\\instrumented\\ && del.\\coverage-frontend\\*.json",
     "frontend-report": "nyc report --reporter html --reporter text -t coverage-frontend--report-dir coverage-frontend/summary"
+    
+    
   },
   "author": "",
   "license": "ISC",
