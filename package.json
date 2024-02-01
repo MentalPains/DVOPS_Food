@@ -6,7 +6,9 @@
   "nyc": {
     "include": [
       "utils/UserUtil.js",
-      "utils/ReviewUtil.js"
+      "utils/ReviewUtil.js",
+      "index.js",
+      "public/**/*.js"
     ],
     "exclude": [],
     "reporter": [
