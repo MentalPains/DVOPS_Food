@@ -15,7 +15,7 @@ function viewReviews() {
                 '<td>' +
                 '<button type="button" class="btn btn-warning" onclick="editReview(\'' +
                 JSON.stringify(response[i]).replaceAll('\"', '&quot;') + '\')">Edit </button> ' +
-                '<button type="button" class="btn btn-danger" onclick="deleteReview(' +
+                '<button type="button" class="btn btn-danger" onclick="showModal(' +
                 response[i].id + ')"> Delete</button>' +
                 '</td>' +
                 '</tr>'
@@ -77,7 +77,7 @@ function updateReview(id) {
     var jsonData = new Object();
     jsonData.name = document.getElementById("editName").value;
     jsonData.description = document.getElementById("editDescription").value;
-    if (jsonData.name == ""  || jsonData.description == "") {
+    if (jsonData.name == "" || jsonData.description == "") {
         document.getElementById("editMessage").innerHTML = 'All fields are required!';
         document.getElementById("editMessage").setAttribute("class", "text-danger");
         return;
@@ -116,4 +116,28 @@ function deleteReview(selectedId) {
         }
     };
     request.send();
+}
+
+function closeModal() {
+    // Close the modal by hiding it
+    var modal = document.getElementById("myModal");
+    modal.style.display = "none";
+}
+function showModal(selectedId) {
+    
+    var modal = document.getElementById("myModal");
+
+    // Set the display property to "block" to show the modal
+    modal.style.display = "block";
+
+    const confirmButton = document.getElementById("confirmBtn");
+    confirmButton.addEventListener("click", function() {
+        deleteReview(selectedId);
+        closeModal();
+    });
+
+    const cancelButton = document.getElementById("cancelBtn");
+    cancelButton.addEventListener("click", function() {
+        closeModal();
+    });
 }
