@@ -18,6 +18,9 @@ before(async function () {
             resolve(server);
         });
 
+    })
+})
+
 
 describe('Testing Edit Review UI', function () {
     it('Should be able to edit and update a review', async function () {
