@@ -17,7 +17,8 @@ before(async function () {
         server = app.listen(0, 'localhost', () => {
             resolve(server);
         });
-
+    });
+});
 
 describe('Testing Edit Review UI', function () {
     it('Should be able to edit and update a review', async function () {
