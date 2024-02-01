@@ -1,5 +1,11 @@
 version: '3'
 services:
+  javier-rms:
+    build:
+      context: .
+      dockerfile: Dockerfile-javier
+    image: javierdvops/rms-docker-img:latest
+    container_name: rms-docker-container
   Johnathon:
     build:
       context: .
