@@ -3,8 +3,8 @@ services:
   javier-rms:
     build:
       context: .
-      dockerfile: Dockerfile-javier
-    image: javierdvops/rms-docker-img:v2
+      dockerfile: Dockerfile-Javier
+    image: javierdvops/rms-docker-img:v3
     container_name: rms-docker-container
   Johnathon:
     build:
