@@ -15,7 +15,7 @@ function viewReviews() {
                 '<td>' +
                 '<button type="button" class="btn btn-warning" onclick="editReview(\'' +
                 JSON.stringify(response[i]).replaceAll('\"', '&quot;') + '\')">Edit </button> ' +
-                '<button type="button" class="btn btn-danger" onclick="confirmDelete(' +
+                '<button type="button" class="btn btn-danger" onclick="showModal(' +
                 response[i].id + ')"> Delete</button>' +
                 '</td>' +
                 '</tr>'
@@ -76,7 +76,7 @@ function updateReview(id) {
     var jsonData = new Object();
     jsonData.name = document.getElementById("editName").value;
     jsonData.description = document.getElementById("editDescription").value;
-    if (jsonData.name == ""  || jsonData.description == "") {
+    if (jsonData.name == "" || jsonData.description == "") {
         document.getElementById("editMessage").innerHTML = 'All fields are required!';
         document.getElementById("editMessage").setAttribute("class", "text-danger");
         return;
@@ -117,16 +117,26 @@ function deleteReview(selectedId) {
     request.send();
 }
 
-async function confirmDelete(selectedId) {
-    // Display a confirmation dialog
-    const confirmed = confirm("Are you sure you want to delete this review?");
+function closeModal() {
+    // Close the modal by hiding it
+    var modal = document.getElementById("myModal");
+    modal.style.display = "none";
+}
+function showModal(selectedId) {
+    
+    var modal = document.getElementById("myModal");
 
-    // Check if the user clicked OK
-    if (confirmed) {
-        // Call the deleteReviews function
+    // Set the display property to "block" to show the modal
+    modal.style.display = "block";
+
+    const confirmButton = document.getElementById("confirmBtn");
+    confirmButton.addEventListener("click", function() {
         deleteReview(selectedId);
-    } else {
-        // User clicked Cancel, do nothing or provide feedback
-        console.log("Delete operation canceled");
-    }
+        closeModal();
+    });
+
+    const cancelButton = document.getElementById("cancelBtn");
+    cancelButton.addEventListener("click", function() {
+        closeModal();
+    });
 }
