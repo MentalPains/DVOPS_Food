@@ -12,7 +12,7 @@ function login() {
     request.setRequestHeader('Content-Type', 'application/json');
     request.onload = function () {
         response = JSON.parse(request.responseText);
-        console.log(response)
+        console.log(JSON.stringify(response));
         if (response.message == "Login successful!") {
             sessionStorage.setItem("email", jsonData.email);
             window.location.href = 'home.html';
