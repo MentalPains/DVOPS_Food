@@ -9,6 +9,7 @@
       "utils/ReviewUtil.js",
       "index.js",
       "public/**/*.js"
+      
     ],
     "exclude": [],
     "reporter": [

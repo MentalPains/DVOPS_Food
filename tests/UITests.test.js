@@ -25,7 +25,7 @@ before(async function () {
 describe('Testing Edit Review UI', function () {
     it('Should be able to edit and update a review', async function () {
         this.timeout(100000);
-        const baseUrl = 'http://localhost:' + server.address().port;
+        const baseUrl = 'http://localhost:' + server.address().port + '/instrumented';
         await driver.get(baseUrl);
 
         // Locate and interact with the email field
@@ -45,7 +45,7 @@ describe('Testing Edit Review UI', function () {
         await driver.wait(until.urlIs(baseUrl + '/home.html'), 10000);
         // Assert that the URL matches the expected URL
         const currentUrl = await driver.getCurrentUrl();
-        expect(currentUrl).to.equal('http://localhost:' + server.address().port + '/home.html');
+        expect(currentUrl).to.equal('http://localhost:' + server.address().port + '/instrumented/home.html');
 
         // Navigate to the "EditModal" page
         const editButton = await driver.findElement(By.xpath("//button[contains(text(), 'Edit')]"));
@@ -99,7 +99,7 @@ describe('Testing Edit Review UI', function () {
 describe('Testing Delete Review UI', function () {
     it('Should be able to see a modal to confirm delete', async function () {
         this.timeout(100000);
-        const baseUrl = 'http://localhost:' + server.address().port;
+        const baseUrl = 'http://localhost:' + server.address().port + '/instrumented';
         await driver.get(baseUrl);
 
         // Locate and interact with the email field
@@ -119,7 +119,7 @@ describe('Testing Delete Review UI', function () {
         await driver.wait(until.urlIs(baseUrl + '/home.html'), 10000);
         // Assert that the URL matches the expected URL
         const currentUrl = await driver.getCurrentUrl();
-        expect(currentUrl).to.equal('http://localhost:' + server.address().port + '/home.html');
+        expect(currentUrl).to.equal('http://localhost:' + server.address().port + '/instrumented/home.html');
 
 
         const deleteButton = await driver.findElement(By.xpath("//button[contains(text(), 'Delete')]"));
