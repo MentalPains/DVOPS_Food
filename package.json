@@ -7,8 +7,9 @@
     "include": [
       "utils/UserUtil.js",
       "utils/ReviewUtil.js",
-      "index.js",
-      "public/**/*.js"
+      "index.js"
+      
+      
       
     ],
     "exclude": [],
