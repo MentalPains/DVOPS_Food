@@ -18,6 +18,9 @@ before(async function () {
             resolve(server);
         });
 
+    })
+})
+
 
 describe('Testing Edit Review UI', function () {
     it('Should be able to edit and update a review', async function () {
@@ -133,14 +136,14 @@ describe('Testing Delete Review UI', function () {
 
 describe('Testing Login UI', function () {
     it('Should have the correct title', async function () {
-        const baseUrl = 'http://localhost:' + server.address().port;
+        const baseUrl = 'http://localhost:' + server.address().port + '/instrumented';
         await driver.get(baseUrl);
         const title = await driver.getTitle();
         expect(title).to.equal('DVOPS - Food Review Web App');
     });
 
     it('Should show error message - All fields required', async function () {
-        const baseUrl = 'http://localhost:' + server.address().port;
+        const baseUrl = 'http://localhost:' + server.address().port + '/instrumented';
         await driver.get(baseUrl);
         const emailElement = await driver.findElement(By.id('email'));
         await emailElement.click();
@@ -155,7 +158,7 @@ describe('Testing Login UI', function () {
 describe('Testing Register UI', function () {
     it('Should show error message - Passwords do not match!', async function () {
         this.timeout(100000);
-        const baseUrl = 'http://localhost:' + server.address().port + '/register.html';
+        const baseUrl = 'http://localhost:' + server.address().port + '/instrumented/register.html';
         await driver.get(baseUrl);
         const emailElement = await driver.findElement(By.id('email'));
         await emailElement.click();
@@ -176,7 +179,7 @@ describe('Testing Register UI', function () {
 
     it('Should clear textboxes when Reset is clicked', async function () {
         this.timeout(100000);
-        const baseUrl = 'http://localhost:' + server.address().port + '/register.html';
+        const baseUrl = 'http://localhost:' + server.address().port + '/instrumented/register.html';
         await driver.get(baseUrl);
         const emailElement = await driver.findElement(By.id('email'));
         await emailElement.click();
@@ -201,7 +204,7 @@ describe('Testing Register UI', function () {
 describe('Testing Reviews UI', function () {
     it('Should be able to add and display new reviews', async function () {
         this.timeout(100000);
-        const baseUrl = 'http://localhost:' + server.address().port;
+        const baseUrl = 'http://localhost:' + server.address().port + '/instrumented';
         await driver.get(baseUrl);
         const emailElement = await driver.findElement(By.id('email'));
         await emailElement.click();
@@ -213,7 +216,7 @@ describe('Testing Reviews UI', function () {
         await loginButton.click();
         await driver.wait(until.urlIs(baseUrl + '/home.html'), 10000);
         const currentUrl = await driver.getCurrentUrl();
-        expect(currentUrl).to.equal('http://localhost:' + server.address().port + '/home.html');
+        expect(currentUrl).to.equal('http://localhost:' + server.address().port + '/instrumented/home.html');
         const addButton = await driver.findElement(By.xpath("//div[@class='col-md-2']//button[contains(text(), 'Add Review')]"));
         await addButton.click();
         const reviewModal = await driver.findElement(By.id('reviewModal'));
@@ -240,6 +243,7 @@ describe('Testing Reviews UI', function () {
 afterEach(async function () {
     await driver.executeScript('return window.__coverage__;').then(async (coverageData) => {
         if (coverageData) {
+            // Save coverage data to a file
             await fs.writeFile('coverage-frontend/coverage' + counter++ + '.json',
                 JSON.stringify(coverageData), (err) => {
                     if (err) {
@@ -249,8 +253,13 @@ afterEach(async function () {
                     }
                 });
         }
-
     });
+});
+
+after(async function () {
+    await driver.quit();
+    await server.close();
+    process.exit(0);
 });
 
 
