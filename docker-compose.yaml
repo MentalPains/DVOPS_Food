@@ -4,7 +4,7 @@ services:
     build:
       context: .
       dockerfile: Dockerfile-Javier
-    image: javierdvops/rms-docker-img:v2
+    image: javierdvops/rms-docker-img:latest
     container_name: rms-docker-container
   Johnathon:
     build:
