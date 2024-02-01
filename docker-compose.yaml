@@ -15,7 +15,7 @@ services:
   Hongshen:
     build:
       context: .
-      dockerfile: Dockerfile-Johnathon
+      dockerfile: Dockerfile-Hongshen
     image: hongbongy/rms-docker-img:latest
     container_name: rms-docker-container
   
