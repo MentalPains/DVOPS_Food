@@ -8,9 +8,6 @@
       "utils/UserUtil.js",
       "utils/ReviewUtil.js",
       "index.js"
-      
-      
-      
     ],
     "exclude": [],
     "reporter": [
