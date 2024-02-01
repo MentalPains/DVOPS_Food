@@ -11,4 +11,5 @@ services:
       context: .
       dockerfile: Dockerfile-Johnathon
     image: mentalpains/rms-docker-img:latest
-    container_name: rms-docker-container
+    container_name: rms-docker-container 
+    
