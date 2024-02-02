@@ -16,7 +16,8 @@ services:
     build:
       context: .
       dockerfile: Dockerfile-Hongshen
-    image: hongbongy/rms-docker-img:latest
+    image: hongbongy/rms-docker-img-hongshen:latest
     container_name: rms-docker-container
+
   
     
