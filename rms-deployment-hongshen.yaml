@@ -14,6 +14,6 @@ spec: # defines the desired state of the Deployment.
     spec: # specifies the container(s) to run
       containers:
       - name: rms-container-hongshen
-        image: hongbongy/rms-docker-img:latest
+        image: hongbongy/rms-docker-img-hongshen:latest
         ports:
         - containerPort: 5050 # specifies the port that the application listens on
