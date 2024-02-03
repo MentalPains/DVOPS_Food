@@ -4,13 +4,22 @@ const { describe, it, before, after } = require('mocha');
 const { expect } = require('chai');
 const fs = require('fs').promises;
 const chrome = require('selenium-webdriver/chrome');
+const edge = require('selenium-webdriver/edge');
+
+
 
 const chromeOptions = new chrome.Options();
 chromeOptions.addArguments('--headless');
 
-const driver = new Builder().forBrowser('chrome').setChromeOptions(chromeOptions).build();
+const edgeOptions = new edge.Options();
+edgeOptions.addArguments('--headless');
+
+let service = new edge.ServiceBuilder('C:/Users/LENOVO/Downloads/edgedriver_win64/msedgedriver'); // Only needed if msedgedriver isn't in your PATH
+
+const driver = new Builder().forBrowser('MicrosoftEdge').setEdgeOptions(edgeOptions).setEdgeService(service).build();
 var server;
 var counter = 0;
+
 
 before(async function () {
     server = await new Promise((resolve) => {
@@ -238,7 +247,37 @@ describe('Testing Reviews UI', function () {
         const rowsUpdated = await tableUpdated.findElements(By.tagName('tr'));
         expect(rowsUpdated.length).to.equal(beforeCount + 1);
     });
+
+    it('Testing Invalidation of the form', async function () {
+        this.timeout(100000);
+        const baseUrl = 'http://localhost:' + server.address().port + '/instrumented';
+        await driver.get(baseUrl);
+        const emailElement = await driver.findElement(By.id('email'));
+        await emailElement.click();
+        await emailElement.sendKeys('john@gmail.com');
+        const passwordElement = await driver.findElement(By.id('password'));
+        await passwordElement.click();
+        await passwordElement.sendKeys('123456');
+        const loginButton = await driver.findElement(By.xpath('//button[text()="Login"]'));
+        await loginButton.click();
+        await driver.wait(until.urlIs(baseUrl + '/home.html'), 10000);
+        const currentUrl = await driver.getCurrentUrl();
+        expect(currentUrl).to.equal('http://localhost:' + server.address().port + '/instrumented/home.html');
+        const addButton = await driver.findElement(By.xpath("//div[@class='col-md-2']//button[contains(text(), 'Add Review')]"));
+        await addButton.click();
+        const reviewModal = await driver.findElement(By.id('reviewModal'));
+        await driver.wait(until.elementIsVisible(reviewModal), 5000);
+        const { Select } = require('selenium-webdriver/lib/select');
+        const addButtonModal = await driver.findElement(By.xpath("//div[@class='modal-footer']//button[contains(text(), 'Add Review')]"));
+        await addButtonModal.click();
+        await driver.wait(until.elementLocated(By.id('message')), 5000);
+        const validationMessage = await driver.findElement(By.id('message')).getText();
+        expect(validationMessage).to.equal('All fields are required!');
+        const messageClass = await driver.findElement(By.id('message')).getAttribute('class');
+        expect(messageClass).to.include('text-danger');
+    });
 });
+
 
 afterEach(async function () {
     await driver.executeScript('return window.__coverage__;').then(async (coverageData) => {

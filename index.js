@@ -2,6 +2,7 @@ var express = require('express');
 var bodyParser = require("body-parser");
 var app = express();
 const logger = require('./logger');
+const path = require('path');
 
 const PORT = process.env.PORT || 5050
 var startPage = "index.html";
@@ -33,6 +34,9 @@ const server = app.listen(PORT, function () {
     logger.info(`Demo project at: ${PORT}!`);
     logger.error(`Example or error log`)
 });
+
+app.use('/instrumented', express.static(path.join(__dirname, 'public/instrumented')));
+
 
 module.exports = { app, server }
 
