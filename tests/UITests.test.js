@@ -14,7 +14,7 @@ chromeOptions.addArguments('--headless');
 const edgeOptions = new edge.Options();
 edgeOptions.addArguments('--headless');
 
-let service = new edge.ServiceBuilder('C:/Users/LENOVO/Downloads/edgedriver_win64/msedgedriver'); // Only needed if msedgedriver isn't in your PATH
+let service = new edge.ServiceBuilder('C:/Users/LENOVO/Downloads/edgedriver_win64/msedgedriver');
 
 const driver = new Builder().forBrowser('MicrosoftEdge').setEdgeOptions(edgeOptions).setEdgeService(service).build();
 var server;
