@@ -10,7 +10,6 @@ provider "azurerm" {
     features {}
 }
 
-
 resource "azurerm_resource_group" "dvopsResourceGroup" {
     name = "dvopsResourceGroup"
     location = "East US"
@@ -29,7 +28,7 @@ resource "azurerm_kubernetes_cluster" "dvopsAKSCluster" {
     }
     
     service_principal {
-        client_id = "a8714770-8d3c-4cb1-b794-bd7f7d14fe3e" 
-        client_secret = "pI98Q~eP92l5rEOLAUqSec3JWNm97TlvMbCGEacs"
+        client_id = "aa5dc162-ac12-4dba-9607-ff3cfc7b6a36" 
+        client_secret = "H5y8Q~oTgBNGu5pudibDsX1RIMqHAt6Oq1Ktab-q"
     }
 }

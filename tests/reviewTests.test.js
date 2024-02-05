@@ -19,7 +19,7 @@ describe('Testing review related features', () => {
     it('Should add a new review successfully', async () => {
         const req = {
             body: {
-                name: "iPad Mini",
+                name: "Macs",
                 description: "For project showcase",
                 owner: "john@gmail.com"
             },
@@ -40,7 +40,7 @@ describe('Testing review related features', () => {
     it('Should not be able to add review due to incomplete input', async () => {
         const req = {
             body: {
-                name: "iPad Mini",
+                name: "Macs",
                 description: "For project showcase"
             },
         };

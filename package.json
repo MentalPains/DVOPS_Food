@@ -7,7 +7,6 @@
     "include": [
       "utils/UserUtil.js",
       "utils/ReviewUtil.js"
-      
     ],
     "exclude": [],
     "reporter": [
@@ -37,9 +36,11 @@
     "express-status-monitor": "^1.3.4",
     "fs": "^0.0.1-security",
     "mocha": "^10.2.0",
+    "msedgedriver": "^91.0.0",
     "nyc": "^15.1.0",
     "selenium-webdriver": "^4.17.0",
     "webdriver-manager": "^12.1.9",
     "winston": "^3.11.0"
   }
 }
+

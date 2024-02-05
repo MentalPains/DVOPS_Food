@@ -4,14 +4,14 @@ services:
     build:
       context: .
       dockerfile: Dockerfile-Javier
-    image: javierdvops/rms-docker-img:v4
+    image: javierdvops/rms-docker-img:v3
     container_name: rms-docker-container
   Johnathon:
     build:
       context: .
       dockerfile: Dockerfile-Johnathon
-    image: mentalpains/rms-docker-img-johnathon:latest
-    container_name: rms-docker-container-johnathon
+    image: mentalpains/rms-docker-img:latest
+    container_name: rms-docker-container
   Hongshen:
     build:
       context: .
