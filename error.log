@@ -7,6 +7,10 @@ error: Example or error log {"timestamp":"2024-02-01T14:08:40.078Z"}
 error: Example or error log {"timestamp":"2024-02-01T14:08:57.746Z"}
 error: Example or error log {"timestamp":"2024-02-01T14:10:55.907Z"}
 error: Example or error log {"timestamp":"2024-02-02T03:43:51.868Z"}
+<<<<<<< HEAD
 error: Example or error log {"timestamp":"2024-02-06T10:14:29.980Z"}
 error: Example or error log {"timestamp":"2024-02-06T10:14:52.198Z"}
 error: Example or error log {"timestamp":"2024-02-06T10:17:58.916Z"}
+=======
+error: Example or error log {"timestamp":"2024-02-06T07:53:43.300Z"}
+>>>>>>> eea477f8977e7f0dc054e201e10a51059243c06c
