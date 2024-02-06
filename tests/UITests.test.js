@@ -4,11 +4,19 @@ const { describe, it, before, after } = require('mocha');
 const { expect } = require('chai');
 const fs = require('fs').promises;
 const chrome = require('selenium-webdriver/chrome');
+const edge = require('selenium-webdriver/edge');
+
+
 
 const chromeOptions = new chrome.Options();
 chromeOptions.addArguments('--headless');
 
-const driver = new Builder().forBrowser('chrome').setChromeOptions(chromeOptions).build();
+const edgeOptions = new edge.Options();
+edgeOptions.addArguments('--headless');
+
+let service = new edge.ServiceBuilder('C:/Users/LENOVO/Downloads/edgedriver_win64/msedgedriver');
+
+const driver = new Builder().forBrowser('MicrosoftEdge').setEdgeOptions(edgeOptions).setEdgeService(service).build();
 var server;
 var counter = 0;
 
