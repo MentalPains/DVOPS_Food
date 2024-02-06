@@ -14,6 +14,6 @@ spec:
     spec:
       containers:
       - name: rms-container
-        image: mentalpains/rms-docker-img-johnathon:v2
+        image: mentalpains/rms-docker-img-johnathon:v3
         ports:
         - containerPort: 5050
