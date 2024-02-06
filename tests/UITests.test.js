@@ -247,7 +247,37 @@ describe('Testing Reviews UI', function () {
         const rowsUpdated = await tableUpdated.findElements(By.tagName('tr'));
         expect(rowsUpdated.length).to.equal(beforeCount + 1);
     });
+
+    it('Testing Invalidation of the form', async function () {
+        this.timeout(100000);
+        const baseUrl = 'http://localhost:' + server.address().port + '/instrumented';
+        await driver.get(baseUrl);
+        const emailElement = await driver.findElement(By.id('email'));
+        await emailElement.click();
+        await emailElement.sendKeys('john@gmail.com');
+        const passwordElement = await driver.findElement(By.id('password'));
+        await passwordElement.click();
+        await passwordElement.sendKeys('123456');
+        const loginButton = await driver.findElement(By.xpath('//button[text()="Login"]'));
+        await loginButton.click();
+        await driver.wait(until.urlIs(baseUrl + '/home.html'), 10000);
+        const currentUrl = await driver.getCurrentUrl();
+        expect(currentUrl).to.equal('http://localhost:' + server.address().port + '/instrumented/home.html');
+        const addButton = await driver.findElement(By.xpath("//div[@class='col-md-2']//button[contains(text(), 'Add Review')]"));
+        await addButton.click();
+        const reviewModal = await driver.findElement(By.id('reviewModal'));
+        await driver.wait(until.elementIsVisible(reviewModal), 5000);
+        const { Select } = require('selenium-webdriver/lib/select');
+        const addButtonModal = await driver.findElement(By.xpath("//div[@class='modal-footer']//button[contains(text(), 'Add Review')]"));
+        await addButtonModal.click();
+        await driver.wait(until.elementLocated(By.id('message')), 5000);
+        const validationMessage = await driver.findElement(By.id('message')).getText();
+        expect(validationMessage).to.equal('All fields are required!');
+        const messageClass = await driver.findElement(By.id('message')).getAttribute('class');
+        expect(messageClass).to.include('text-danger');
+    });
 });
+
 
 afterEach(async function () {
     await driver.executeScript('return window.__coverage__;').then(async (coverageData) => {

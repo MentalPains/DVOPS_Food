@@ -1,5 +1,0 @@
-<<<<<<< HEAD
-{"processes":{"2ca30503-85cd-491b-8e8a-492fe7e80b3f":{"parent":null,"children":[]},"58229985-fce3-4d12-acdb-595bc4d3d46d":{"parent":null,"children":[]}},"files":{"C:\\Users\\LENOVO\\Desktop\\DVOPS_Food1\\utils\\ReviewUtil.js":["2ca30503-85cd-491b-8e8a-492fe7e80b3f","58229985-fce3-4d12-acdb-595bc4d3d46d"],"C:\\Users\\LENOVO\\Desktop\\DVOPS_Food1\\utils\\UserUtil.js":["2ca30503-85cd-491b-8e8a-492fe7e80b3f","58229985-fce3-4d12-acdb-595bc4d3d46d"]},"externalIds":{}}
-=======
-{"processes":{"242edca6-1916-4294-891d-674122253da2":{"parent":"f6440ce5-eb7b-473a-8d45-488f6cf131ca","children":[]},"c55d2195-9c9b-4220-bf82-8d017412a270":{"parent":null,"children":[]},"f6440ce5-eb7b-473a-8d45-488f6cf131ca":{"parent":null,"children":["242edca6-1916-4294-891d-674122253da2"]}},"files":{"C:\\Users\\LENOVO\\Desktop\\DVOPS_Food\\utils\\ReviewUtil.js":["c55d2195-9c9b-4220-bf82-8d017412a270","f6440ce5-eb7b-473a-8d45-488f6cf131ca"],"C:\\Users\\LENOVO\\Desktop\\DVOPS_Food\\utils\\UserUtil.js":["c55d2195-9c9b-4220-bf82-8d017412a270","f6440ce5-eb7b-473a-8d45-488f6cf131ca"]},"externalIds":{}}
->>>>>>> eea477f8977e7f0dc054e201e10a51059243c06c
