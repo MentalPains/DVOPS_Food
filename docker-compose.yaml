@@ -10,7 +10,7 @@ services:
     build:
       context: .
       dockerfile: Dockerfile-Johnathon
-    image: mentalpains/rms-docker-img-johnathon:latest
+    image: mentalpains/rms-docker-img-johnathon:v1
     container_name: rms-docker-container-johnathon
   Hongshen:
     build:
