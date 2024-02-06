@@ -1,19 +1,19 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: rms-deployment
+  name: rms-deployment-johnathon
 spec:
   replicas: 2
   selector:
     matchLabels:
-      app: rms-docker-img
+      app: rms-docker-img-johnathon
   template:
     metadata:
       labels:
-        app: rms-docker-img
+        app: rms-docker-img-johnathon
     spec:
       containers:
       - name: rms-container
-        image: mentalpains/rms-docker-img:v2
+        image: mentalpains/rms-docker-img-johnathon:latest
         ports:
         - containerPort: 5050
