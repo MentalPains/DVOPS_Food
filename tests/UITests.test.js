@@ -12,6 +12,7 @@ const driver = new Builder().forBrowser('chrome').setChromeOptions(chromeOptions
 var server;
 var counter = 0;
 
+
 before(async function () {
     server = await new Promise((resolve) => {
         server = app.listen(0, 'localhost', () => {
